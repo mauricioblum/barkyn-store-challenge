@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "../modules/styled";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   html, body {
     font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
   }
 `;
 

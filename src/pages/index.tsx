@@ -1,5 +1,11 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import styled from '../modules/styled';
+
+const Title = styled.h1`
+  font-size: 50px;
+  color: ${({ theme }) => theme.colors.primary};
+`;
 
 export default function Home() {
   return (
@@ -12,7 +18,7 @@ export default function Home() {
 
       <main>
         <div>
-          <h3>Hello Next</h3>
+          <Title>Hello Next</Title>
         </div>
       </main>
 
