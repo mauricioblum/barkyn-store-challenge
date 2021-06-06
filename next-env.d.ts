@@ -7,6 +7,10 @@ declare module "styled-components" {
   export interface DefaultTheme {
     colors: {
       primary: string;
+      secondary: string;
+      background: string;
+      backgroundSecondary: string;
+      text: string;
     };
   }
 }

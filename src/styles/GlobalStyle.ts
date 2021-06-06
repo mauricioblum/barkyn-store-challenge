@@ -10,6 +10,10 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
   }
+
+  button {
+    all: unset;
+  }
 `;
 
 export default GlobalStyle;

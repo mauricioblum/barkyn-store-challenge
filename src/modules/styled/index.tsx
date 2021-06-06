@@ -1,5 +1,5 @@
-import styled, { css, createGlobalStyle } from 'styled-components';
+import styled, { css, createGlobalStyle, ThemeProvider } from 'styled-components';
 
-export { css, createGlobalStyle};
+export { css, createGlobalStyle, ThemeProvider};
 
 export default styled;
