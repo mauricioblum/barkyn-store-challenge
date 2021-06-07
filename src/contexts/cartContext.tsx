@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
-import { useRouter } from 'next/router'
 
 import { Product } from '../pages/api/products';
 
@@ -9,12 +8,23 @@ export interface CartProduct extends Omit<Product, 'colors' | 'sizes'> {
   quantity: number;
 }
 
+export interface ShippingInformation {
+  name: string;
+  email: string;
+  address: string;
+  postalCode: string;
+  country: string;
+  phone: string;
+}
+
 interface CartContextData {
   cartProducts: CartProduct[];
   total: string;
+  shipping?: ShippingInformation;
   addProduct: (productToAdd: CartProduct) => void;
   removeProduct: (id: number) => void;
   updateQuantity: (id: number, newQuantity: number) => void;
+  updateShippingInformation: (data: ShippingInformation) => void;
 }
 
 export const CartContext = createContext({} as CartContextData);
@@ -26,8 +36,9 @@ interface CartProviderProps {
 export const CartProvider = ({ children }: CartProviderProps) => {
 
   const [cartProducts, setCartProducts] = useState<CartProduct[]>([]);
+  const [shipping, setShipping] = useState<ShippingInformation>();
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const updateQuantity = (id: number, newQuantity: number) => {
     const productIndex = cartProducts.findIndex((product) => product.id === id);
@@ -69,11 +80,15 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
   const total = useMemo(() => {
     const newTotal = cartProducts.reduce((acumulator, product) => {
-      return acumulator + Number(product.price) * product.quantity;
+      return acumulator + product.price * product.quantity;
     }, 0);
 
     return String(newTotal);
   }, [cartProducts]);
+
+  const updateShippingInformation = (data: ShippingInformation) => {
+    setShipping(data);
+  }
 
 
   return (
@@ -84,6 +99,8 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         updateQuantity,
         removeProduct,
         total,
+        shipping,
+        updateShippingInformation,
       }}
     >
       {children}

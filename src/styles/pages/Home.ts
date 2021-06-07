@@ -56,93 +56,11 @@ export const ProductList = styled.div`
   }
 `;
 
-export const ProductItem = styled.div`
+export const LoadingProduct = styled.div`
   border-radius: 0.5rem;
   padding: 0.5rem;
   text-align: center;
   border: ${({ theme }) => `1px solid ${theme.colors.primary}`};
   border-style: inset;
   min-height: 310px;
-
-  &:focus {
-    border: ${({ theme }) => `2px solid ${theme.colors.primary}`};
-  }
-  &:hover {
-    background: ${({ theme }) => theme.colors.backgroundSecondary};
-  }
-
-  span {
-    font-weight: bold;
-    font-size: 1.3rem;
-  }
-`;
-
-export const Row = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  button {
-    margin-left: 2px;
-  }
-  &:last-child {
-    margin-left: 0;
-  }
-`;
-
-export const Color = styled.button<{ colorTint: string; isSelected?: boolean }>`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: ${({ colorTint }) => colorTint};
-  border: ${({ isSelected, theme }) =>
-    isSelected ? `2px solid ${theme.colors.primary}` : "1px solid black"};
-  cursor: pointer;
-
-  &:focus {
-    transform: scale(1.1);
-  }
-
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
-export const Size = styled.button<{ isSelected?: boolean }>`
-  width: 28px;
-  height: 28px;
-  background: black;
-  color: white;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: ${({ isSelected, theme }) =>
-    isSelected ? `2px solid ${theme.colors.primary}` : "1px solid black"};
-  cursor: pointer;
-
-  &:focus {
-    transform: scale(1.1);
-  }
-
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
-export const AddToCartButton = styled.button`
-  padding: 0.8rem 1rem;
-  text-align: center;
-  color: white;
-  background: ${({ theme }) => theme.colors.primary};
-  cursor: pointer;
-  margin-top: 0.5rem;
-
-  &:focus,
-  &:hover {
-    background: ${({ theme }) => theme.colors.secondary};
-  }
-  &:disabled {
-    background: ${({ theme }) => theme.colors.backgroundSecondary};
-  }
 `;

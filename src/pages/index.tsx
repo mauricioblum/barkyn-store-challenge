@@ -1,10 +1,21 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Head from 'next/head'
-import Image from 'next/image'
-import { Container, PageWrapper, Title, SubTitle, ProductList, ProductItem, Row, Color, Size, AddToCartButton } from '../styles/pages/Home';
+import Skeleton from 'react-loading-skeleton';
+import { useRouter } from 'next/router'
+import { 
+  Container, 
+  PageWrapper, 
+  Title, 
+  SubTitle, 
+  ProductList,
+  LoadingProduct,
+} from '../styles/pages/Home';
 import { Product } from './api/products';
 import { fetchProducts } from '../services';
 import { useCart, CartProduct } from '../contexts/cartContext';
+import Button from '../components/Button';
+import ProductItem from '../components/ProductItem';
+
 
 export default function Home() {
 
@@ -12,17 +23,21 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<Product>();
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  const { addProduct, cartProducts } = useCart();
+  const { addProduct, total } = useCart();
 
   useEffect(() => {
     async function getProducts() {
+      setLoading(true);
       const productsResponse = await fetchProducts();
 
       if (productsResponse) {
         setProducts(productsResponse);
         console.log('products', productsResponse);
       }
+      setLoading(false);
     }
     getProducts();
   }, []);
@@ -59,7 +74,9 @@ export default function Home() {
       return false;
     }
     return true;
-  }, [selectedColor, selectedSize])
+  }, [selectedColor, selectedSize]);
+
+  const loadingContent = new Array<string>(6).fill('Loading...');
 
   return (
     <PageWrapper>
@@ -76,39 +93,30 @@ export default function Home() {
           <section id="products">
             <div className="menu">
               <SubTitle>Products</SubTitle>
-              <p>Cart: {cartProducts.length}</p>
+              <Button onClick={() => router.push('cart')}>Cart Total:  € {total}</Button>
             </div>
 
 
             <ProductList>
               {products.map(product => (
-                <ProductItem key={product.id} aria-label="product">
-                  <div onClick={() => handleSelectProduct(product)}>
-                    <Image src={product.image} width="100" height="100" />
-                    <p>{product.title}</p>
-                    <span>€ {product.price}</span>
-                  </div>
-
-                  {selectedProduct?.id === product.id && (
-                    <div className="productOptions">
-                      <p>Colors</p>
-                      <Row>
-                        {product.colors.map(color => (
-                          <Color key={color} isSelected={color === selectedColor} colorTint={color} onClick={() => setSelectedColor(color)} />
-                        ))}
-                      </Row>
-
-                      <p>Size</p>
-                      <Row>
-                        {product.sizes.map(size => (
-                          <Size key={size} isSelected={size === selectedSize} onClick={() => setSelectedSize(size)}>{size}</Size>
-                        ))}
-                      </Row>
-
-                      <AddToCartButton disabled={addToCartDisabled} onClick={handleAddToCart}>Add to Cart</AddToCartButton>
-                    </div>
-                  )}
-                </ProductItem>
+                <ProductItem 
+                  key={product.id} 
+                  product={product} 
+                  selectedProduct={selectedProduct}
+                  onSelectProduct={handleSelectProduct}
+                  selectedColor={selectedColor}
+                  selectedSize={selectedSize}
+                  onClickAddToCart={handleAddToCart}
+                  addToCartDisabled={addToCartDisabled}
+                  onSelectColor={(color) => setSelectedColor(color)}
+                  onSelectSize={(size) => setSelectedSize(size)}
+                />
+              ))}
+              {loading && loadingContent.map((content, index) => (
+                <LoadingProduct key={index}>
+                  <Skeleton circle={true} height={100} width={100} />
+                  <Skeleton count={2} style={{ marginTop: 10 }} />
+                </LoadingProduct>
               ))}
             </ProductList>
 
