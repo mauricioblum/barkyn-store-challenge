@@ -25,6 +25,7 @@ yarn test
 
 - Usage of Data fetching libs like useSWR, for automatic revalidation and error handling
 - Data formatting for currencies
-- Update quantity directly in Cart page
+- Update quantity directly in Cart page or product page
+- SEO component for meta tags
 
 

@@ -6,14 +6,6 @@ export const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  footer {
-    width: 100%;
-    justify-self: flex-end;
-    text-align: center;
-    padding: 1.5rem 0;
-    background: ${({ theme }) => theme.colors.backgroundSecondary};
-  }
 `;
 
 export const Container = styled.div`
@@ -27,6 +19,13 @@ export const Container = styled.div`
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      @media (max-width: 410px) {
+        button {
+          padding: 0.5rem;
+          font-size: 0.9rem;
+        }
+      }
     }
   }
 `;
@@ -34,12 +33,19 @@ export const Container = styled.div`
 export const Title = styled.h1`
   font-size: 3rem;
   color: ${({ theme }) => theme.colors.primary};
+
+  @media (max-width: 410px) {
+    font-size: 1.5rem;
+  }
 `;
 
 export const SubTitle = styled.h2`
   margin-top: 0.5rem;
   font-size: 2rem;
   color: ${({ theme }) => theme.colors.primary};
+  @media (max-width: 410px) {
+    font-size: 1rem;
+  }
 `;
 
 export const ProductList = styled.div`

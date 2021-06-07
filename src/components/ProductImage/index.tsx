@@ -15,9 +15,10 @@ export const ImageWrapper = styled.div`
 interface ProductImageProps {
   image: string;
   color: string;
+  size?: number;
 }
 
-const ProductImage: React.FC<ProductImageProps> = ({ image, color }) => {
+const ProductImage: React.FC<ProductImageProps> = ({ image, color, size = 200 }) => {
 
   const getTShirtColor = () => {
 
@@ -35,7 +36,7 @@ const ProductImage: React.FC<ProductImageProps> = ({ image, color }) => {
         return 'invert(10%) sepia(71%) saturate(3905%) hue-rotate(234deg) brightness(125%) contrast(143%)';
       }
       case 'white': {
-        return 'invert(100%) sepia(100%) saturate(0%) hue-rotate(218deg) brightness(105%) contrast(103%)';
+        return 'invert(100%) sepia(100%) saturate(50%) hue-rotate(218deg) brightness(105%) contrast(103%)';
       }
       case 'purple': {
         return 'invert(16%) sepia(84%) saturate(2164%) hue-rotate(287deg) brightness(81%) contrast(113%)';
@@ -45,8 +46,8 @@ const ProductImage: React.FC<ProductImageProps> = ({ image, color }) => {
 
   return (
     <ImageWrapper>
-      <img className="tshirt" src="/tshirt.png" width="200" height="197" style={{ filter: getTShirtColor()}} />
-      <img className="stamp" src={image} width="60" height="60" />
+      <img className="tshirt" src="/tshirt.png" width={size} height={size - 3} style={{ filter: getTShirtColor()}} />
+      <img className="stamp" src={image} width={(size / 4) + 10} height={(size / 4) + 10} />
     </ImageWrapper>
   );
 }
