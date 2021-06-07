@@ -47,10 +47,11 @@ export const CustomErrorMessage = styled.span`
 export const CustomInputComponent = ({
   field, 
   form: { touched, errors },
+  type,
   ...props
-}: FieldProps) => (
+}: FieldProps & { type?: string }) => (
   <>
-    <CustomInput {...field} {...props} hasError={!!errors[field.name]} />
+    <CustomInput type={type} {...field} {...props} hasError={!!errors[field.name]} />
     {touched[field.name] &&
       errors[field.name] && <CustomErrorMessage className="error">{errors[field.name]}</CustomErrorMessage>}
   </>
