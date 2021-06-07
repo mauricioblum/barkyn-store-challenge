@@ -5,8 +5,10 @@ Project created for Barkyn Code Challenge
 This application was built using the following libraries and approches:
 
 - React
+- Typescript
 - Next.JS
-- Next.JS Api Routes with Faker as a mocked BE service
+- Next.JS Api Routes with Faker as a mocked BE service (/api/products)
+- Formik
 - React Context Api
 - Styled Components
 - Axios
