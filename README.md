@@ -1,4 +1,15 @@
-Barkyn Challenge
+Barkyn Code Challenge 🐶
+
+Project created for Barkyn Code Challenge
+
+This application was built using the following libraries and approches:
+
+- React
+- Next.JS
+- Next.JS Api Routes with Faker as a mocked BE service
+- React Context Api
+- Styled Components
+- Axios
 ## Getting Started
 
 First, install the project dependencies running this command in the project directory:
@@ -27,5 +38,9 @@ yarn test
 - Data formatting for currencies
 - Update quantity directly in Cart page or product page
 - SEO component for meta tags
+- General UI/UX improvements
+
+
+Made with ❤ by @mauricioblum
 
 
