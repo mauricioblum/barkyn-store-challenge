@@ -13,12 +13,12 @@ export const ImageWrapper = styled.div`
 `;
 
 interface ProductImageProps {
-  image: string;
+  imageURL: string;
   color: string;
   size?: number;
 }
 
-const ProductImage: React.FC<ProductImageProps> = ({ image, color, size = 200 }) => {
+const ProductImage: React.FC<ProductImageProps> = ({ imageURL, color, size = 200 }) => {
 
   const getTShirtColor = () => {
 
@@ -46,8 +46,8 @@ const ProductImage: React.FC<ProductImageProps> = ({ image, color, size = 200 })
 
   return (
     <ImageWrapper>
-      <img className="tshirt" src="/tshirt.png" width={size} height={size - 3} style={{ filter: getTShirtColor()}} />
-      <img className="stamp" src={image} width={(size / 4) + 10} height={(size / 4) + 10} />
+      <img className="tshirt" src="/tshirt.png" alt="Shirt" width={size} height={size - 3} style={{ filter: getTShirtColor()}} />
+      <img className="stamp" src={imageURL} alt="Stamp" width={(size / 4) + 10} height={(size / 4) + 10} />
     </ImageWrapper>
   );
 }

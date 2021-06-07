@@ -22,9 +22,9 @@ const SuccessPage: React.FC = () => {
             <OrderTitle>Products</OrderTitle>
             <List>
               {cartProducts.map(product => (
-                <Product key={product.id}>
+                <Product key={product.productId}>
                   <div className="info">
-                    <ProductImage image={product.image} color={product.color} size={60} />
+                    <ProductImage imageURL={product.image} color={product.color} size={60} />
                     <div className="detail">
                       <p>{product.title}</p>
                       <p>Size: {product.size}</p>

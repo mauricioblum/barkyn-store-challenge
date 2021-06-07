@@ -2,7 +2,7 @@ import React, { createContext, useContext, useMemo, useState } from 'react';
 
 import { Product } from '../pages/api/products';
 
-export interface CartProduct extends Omit<Product, 'colors' | 'sizes'> {
+export interface CartProduct extends Omit<Product, 'colors' | 'productSizes'> {
   size: string;
   color: string;
   quantity: number;
@@ -41,7 +41,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   // const router = useRouter();
 
   const updateQuantity = (id: number, newQuantity: number) => {
-    const productIndex = cartProducts.findIndex((product) => product.id === id);
+    const productIndex = cartProducts.findIndex((product) => product.productId === id);
 
     const newCart = [...cartProducts];
 
@@ -51,14 +51,14 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   }
 
   const addProduct = async (productToAdd: CartProduct) => {
-    const productExists = cartProducts.find((product) => product.id === productToAdd.id);
+    const productExists = cartProducts.find((product) => product.productId === productToAdd.productId);
 
     const currentQuantity = productExists ? productExists.quantity : 0;
 
     const newQuantity = currentQuantity + 1;
 
     if (productExists) {
-      updateQuantity(productToAdd.id, newQuantity);
+      updateQuantity(productToAdd.productId, newQuantity);
     } else {
 
       setCartProducts([...cartProducts, productToAdd]);
@@ -67,7 +67,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   };
 
   const removeProduct = async (productId: number) => {
-    const productIndex = cartProducts.findIndex((product) => product.id === productId);
+    const productIndex = cartProducts.findIndex((product) => product.productId === productId);
 
     if (productIndex >= 0) {
       const newCart = [...cartProducts];

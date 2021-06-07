@@ -66,7 +66,6 @@ export const LoadingProduct = styled.div`
   border-radius: 0.5rem;
   padding: 0.5rem;
   text-align: center;
-  border: ${({ theme }) => `1px solid ${theme.colors.primary}`};
-  border-style: inset;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   min-height: 310px;
 `;

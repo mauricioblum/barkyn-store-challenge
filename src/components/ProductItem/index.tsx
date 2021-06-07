@@ -37,24 +37,24 @@ const ProductItem: React.FC<ProductItemProps> = ({
   }
 
   return (
-    <Container aria-label="product">
+    <Container aria-label="product" data-testid="product">
       <ProductInfo onClick={() => onSelectProduct(product)}>
-        <ProductImage image={product.image} color={shirtColor} />
+        <ProductImage imageURL={product.image} color={shirtColor} />
         <p>{product.title}</p>
         <span>€ {product.price}</span>
       </ProductInfo>
 
-      {selectedProduct?.id === product.id && (
+      {selectedProduct?.productId === product.productId && (
         <div className="productOptions">
           <Row>
             {product.colors.map(color => (
-              <Color key={color} isSelected={color === selectedColor} colorTint={color} onClick={() => handleSelectColor(color)}>{color === selectedColor && '✓'}</Color>
+              <Color key={color} data-testid={`color-${color}`} isSelected={color === selectedColor} colorTint={color} onClick={() => handleSelectColor(color)}>{color === selectedColor && '✓'}</Color>
             ))}
           </Row>
 
           <Row>
-            {product.sizes.map(size => (
-              <Size key={size} isSelected={size === selectedSize} onClick={() => onSelectSize(size)}>{size}</Size>
+            {product.productSizes.map(size => (
+              <Size key={size} data-testid={`size-${size}`} isSelected={size === selectedSize} onClick={() => onSelectSize(size)}>{size}</Size>
             ))}
           </Row>
 

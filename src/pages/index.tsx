@@ -36,7 +36,6 @@ export default function Home() {
 
       if (productsResponse) {
         setProducts(productsResponse);
-        console.log('products', productsResponse);
       }
       setLoading(false);
     }
@@ -47,10 +46,10 @@ export default function Home() {
 
     if (selectedProduct) {
 
-      const { id, image, price, title } = selectedProduct
+      const { productId, image, price, title } = selectedProduct
 
       const productToCart: CartProduct = {
-        id,
+        productId,
         image,
         title,
         price,
@@ -59,7 +58,6 @@ export default function Home() {
         quantity: 1,
       };
 
-      console.log('The product to be added to cart: ', productToCart);
       addProduct(productToCart);
     }
   }
@@ -94,14 +92,14 @@ export default function Home() {
           <section id="products">
             <div className="menu">
               <SubTitle>Products</SubTitle>
-              <Button onClick={() => router.push('cart')}>Cart Total:  € {total}</Button>
+              <Button data-testid="cartButton" onClick={() => router.push('cart')}>Cart Total:  € {total}</Button>
             </div>
 
 
             <ProductList>
               {products.map(product => (
                 <ProductItem
-                  key={product.id}
+                  key={product.productId}
                   product={product}
                   selectedProduct={selectedProduct}
                   onSelectProduct={handleSelectProduct}

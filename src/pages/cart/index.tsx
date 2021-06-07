@@ -54,9 +54,9 @@ const Cart: React.FC = () => {
 
         <CartList>
           {cartProducts.map(product => (
-            <CartItem key={product.id}>
+            <CartItem key={product.productId}>
               <div className="info">
-                <ProductImage image={product.image} color={product.color} size={100} />
+                <ProductImage imageURL={product.image} color={product.color} size={100} />
                 <div className="detail">
                   <p>{product.title}</p>
                   <p>Size: {product.size}</p>
@@ -75,7 +75,6 @@ const Cart: React.FC = () => {
         <Formik
           initialValues={initialValues}
           onSubmit={(values, actions) => {
-            console.log({ values, actions });
             actions.setSubmitting(false);
             updateShippingInformation(values);
             router.push('success');
